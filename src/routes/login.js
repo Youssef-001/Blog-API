@@ -2,6 +2,7 @@ const express = require('express'); // Import express
 const router = express.Router();   // Create a router instance
 require('dotenv').config();
 const user_queries = require('../queries/user_queries')
+const jwt = require('jsonwebtoken')
 
 router.post('/', async(req,res,next) => {
 
