@@ -14,4 +14,17 @@ router.post('/', authenticateToken,(req,res) => {
     postController.create_post(req,res);
 })
 
+router.get('/:id', authenticateToken, async(req,res) => {
+    try {
+    let post = await postController.get_post(req,res);
+    res.json(post);
+    }
+    catch(err)
+    {
+        console.error(err);
+        res.status(403).json({message: "post not found"});
+    }
+
+})
+
 module.exports = router;

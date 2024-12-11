@@ -9,11 +9,11 @@ models:
 endpoints: 
 
 
-POST /sign-up
-POST /login
+POST /sign-up DONE
+POST /login DONE
 
-GET /posts
-POST /posts
+GET /posts DONE
+POST /posts DONE
 GET /posts/:id
 PUT /posts/:id
 DELETE /posts/:id

@@ -23,4 +23,14 @@ async function create_post(title,content,id)
 
 }
 
-module.exports = {get_posts, create_post}
+
+async function get_post(id)
+{
+    let post = await prisma.posts.findUnique({
+        where: {id:id}
+    })
+
+    return post;
+}
+
+module.exports = {get_posts, create_post, get_post}
