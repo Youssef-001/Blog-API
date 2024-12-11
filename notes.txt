@@ -1,0 +1,30 @@
+models:
+
+- users (id PK,username, email, password, isAuthor defaults to false) // owner of the blog
+- posts (id,title, content, created_at, updated_at, satus, relation with comments  )
+- comments (id PK, content, authorName, authorId, created_at, post_id FK)
+
+
+
+endpoints: 
+
+
+POST /sign-up
+POST /login
+
+GET /posts
+POST /posts
+GET /posts/:id
+PUT /posts/:id
+DELETE /posts/:id
+
+// filters
+GET /posts?author_id=12
+GET /posts?page=1&limit=10
+
+GET /comments/:post_id
+POST /comments/:post_id
+DELETE /comments/:comment_id
+
+
+

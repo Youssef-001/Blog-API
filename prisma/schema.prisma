@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+
+model users{
+  id String @id @default(uuid())
+  username String 
+  email String @unique
+  password String
+  isAuthor Boolean @default(false)
+  posts posts[]
+  comments comments[]
+}
+
+model posts {
+  id  String @id @default(uuid())
+  title String
+  content String
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+  authorId String
+  author users @relation(fields: [authorId], references: [id])
+  status post_status @default(PUBLISHED)
+  comments comments[]
+
+}
+
+model comments {
+  id String @id @default(uuid())
+  content String
+  authorName String 
+  authorId String
+  created_at DateTime @default(now())
+  post posts @relation(fields: [post_id], references: [id])
+  post_id String 
+ author     users    @relation(fields: [authorId], references: [id]) // Reference to user who wrote the comment
+ 
+
+}
+
+
+enum post_status {
+  PUBLISHED
+  UNPUBLISHED
+  ARCHIVED
+}
