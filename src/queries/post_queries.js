@@ -33,4 +33,26 @@ async function get_post(id)
     return post;
 }
 
-module.exports = {get_posts, create_post, get_post}
+
+async function edit_post(title,content,id)
+{
+    let now = new Date();
+    let formattedNow = now.toISOString().slice(0, 19).replace("T", " ");
+
+    console.log(now.getDate());
+    let post = await prisma.posts.update({
+
+        where: {
+            id:id
+        },
+        data: {
+            title:title,
+            content: content,
+            updated_at: now
+        }
+    })
+
+    return post;
+}
+
+module.exports = {get_posts, create_post, get_post,edit_post}

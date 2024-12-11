@@ -10,10 +10,13 @@ router.get('/', authenticateToken,(req,res) => {
 
 }) 
 
+// Create a post
 router.post('/', authenticateToken,(req,res) => {
     postController.create_post(req,res);
 })
 
+
+// Get a single post
 router.get('/:id', authenticateToken, async(req,res) => {
     try {
     let post = await postController.get_post(req,res);
@@ -25,6 +28,12 @@ router.get('/:id', authenticateToken, async(req,res) => {
         res.status(403).json({message: "post not found"});
     }
 
+})
+
+// Edit a post
+
+router.put('/:id', authenticateToken, async(req,res) => {
+    postController.update_post(req,res);
 })
 
 module.exports = router;

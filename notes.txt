@@ -14,7 +14,7 @@ POST /login DONE
 
 GET /posts DONE
 POST /posts DONE
-GET /posts/:id
+GET /posts/:id DONE
 PUT /posts/:id
 DELETE /posts/:id
 
