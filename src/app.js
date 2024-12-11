@@ -11,6 +11,8 @@ app.use(
 const sign_up_router = require('./routes/sign-up');
 const login_router = require('./routes/login');
 
+const authenticateToken = require('./middlewares/authenticateToken');
+
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
@@ -22,6 +24,9 @@ app.get('/', (req,res) => {
 app.use('/sign-up',sign_up_router);
 app.use('/login', login_router)
 
+app.get('/protected', authenticateToken, (req,res) => {
+    res.send("this is secret");
+})
 
 passport.use(
     new LocalStrategy((username, password, done) => {
