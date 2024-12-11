@@ -10,6 +10,7 @@ app.use(
 
 const sign_up_router = require('./routes/sign-up');
 const login_router = require('./routes/login');
+const posts_router = require('./routes/posts');
 
 const authenticateToken = require('./middlewares/authenticateToken');
 
@@ -22,7 +23,8 @@ app.get('/', (req,res) => {
 })
 
 app.use('/sign-up',sign_up_router);
-app.use('/login', login_router)
+app.use('/login', login_router);
+app.use('/posts', posts_router);
 
 app.get('/protected', authenticateToken, (req,res) => {
     res.send("this is secret");
