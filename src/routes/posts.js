@@ -36,4 +36,8 @@ router.put('/:id', authenticateToken, async(req,res) => {
     postController.update_post(req,res);
 })
 
+router.delete('/:id', authenticateToken, async(req,res) => {
+    postController.delete_post(req,res);
+})
+
 module.exports = router;

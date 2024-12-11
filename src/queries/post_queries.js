@@ -55,4 +55,22 @@ async function edit_post(title,content,id)
     return post;
 }
 
-module.exports = {get_posts, create_post, get_post,edit_post}
+
+async function delete_post(id) {
+    try {
+        const post = await prisma.posts.delete({
+            where: { id: id }
+        });
+
+        if (!post) {
+            throw new Error('Post not found');
+        }
+
+        return post; // You could return the deleted post if needed
+    } catch (error) {
+        console.error('Error deleting post:', error.message);
+        throw new Error('Could not delete the post');
+    }
+}
+
+module.exports = {get_posts, create_post, get_post,edit_post, delete_post}

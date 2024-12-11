@@ -57,4 +57,32 @@ async function update_post(req,res)
     }
 }
 
-module.exports = {get_posts, create_post, get_post,update_post};  
+
+async function delete_post(req,res)
+{
+
+    let post_id = req.params.id;
+
+    try {
+        const post = await post_queries.get_post(post_id);
+
+        if (!post) {
+            return res.status(404).json({ message: "Post not found" }); // If the post does not exist, return 404
+        }
+
+        await post_queries.delete_post(post_id);
+        res.status(200).json({ message: "Post deleted successfully" });
+
+
+
+    }
+
+    catch(err)
+    {
+        console.error(err);
+        res.status(500).json({message:"Error deleting post"})
+    }
+
+}
+
+module.exports = {get_posts, create_post, get_post,update_post, delete_post};  
