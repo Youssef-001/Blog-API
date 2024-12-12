@@ -13,6 +13,12 @@ async function create_post(req, res) {
   let title = req.body.title;
   let content = req.body.content;
 
+  if (req.user.isAuthor == false)
+  {
+    return res.status(403).json({ message: "You do not have permission to create a post" });
+  
+  }
+
   try {
     let posts = await post_queries.create_post(title, content, req.user.id);
     res.json(posts);
