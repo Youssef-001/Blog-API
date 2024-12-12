@@ -26,4 +26,22 @@ catch(err)
 
 }
 
-module.exports = {create_comment}
+
+async function get_comments(req,res)
+{
+    let post_id = req.params.post_id;
+
+    try {
+        let comments = await comment_queries.get_comments(post_id);
+        
+        res.status(200).json(comments);
+    }
+
+    catch(err)
+    {
+        console.error(err.message);
+        res.status(500).json("Error getting comments");
+    }
+}
+
+module.exports = {create_comment,get_comments}

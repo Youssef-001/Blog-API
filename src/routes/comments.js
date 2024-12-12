@@ -11,4 +11,8 @@ router.post('/:post_id', authenticateToken,(req,res) => {
     
 })
 
+router.get('/:post_id', authenticateToken, (req,res) => {
+    commentController.get_comments(req,res);
+})
+
 module.exports = router;

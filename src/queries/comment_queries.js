@@ -24,4 +24,19 @@ async function create_comment(content, author_name, authorId, post_id)
     }
 }
 
-module.exports = {create_comment}
+async function get_comments(post_id)
+{
+    try {
+        let comments = await prisma.comments.findMany({
+            where: {post_id: post_id}
+        })
+        return comments;
+    }
+
+    catch(err)
+    {
+        console.error("Error retrieving comments ", err.message);
+    }
+}
+
+module.exports = {create_comment,get_comments}

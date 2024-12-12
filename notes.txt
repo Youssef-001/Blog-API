@@ -22,8 +22,8 @@ DELETE /posts/:id DONE
 GET /posts?author_id=12 DONE
 GET /posts?page=1 DONE
 
-GET /comments/:post_id
-POST /comments/:post_id
+GET /comments/:post_id  DONE
+POST /comments/:post_id DONE
 DELETE /comments/:comment_id
 
 
