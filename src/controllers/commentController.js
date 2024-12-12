@@ -44,4 +44,21 @@ async function get_comments(req,res)
     }
 }
 
-module.exports = {create_comment,get_comments}
+
+async function delete_comment(req,res)
+{
+    let comment_id = req.params.comment_id;
+
+    try {
+      let comment =  await comment_queries.delete_comment(comment_id);
+        res.status(200).json({comment,message:"Comment deleted successfully"});
+    }
+
+    catch(err)
+    {
+        res.status(500).json("Error deleting comment");
+
+    }
+}
+
+module.exports = {create_comment,get_comments, delete_comment}

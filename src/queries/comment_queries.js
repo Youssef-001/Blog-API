@@ -39,4 +39,35 @@ async function get_comments(post_id)
     }
 }
 
-module.exports = {create_comment,get_comments}
+async function get_comment(comment_id)
+{
+    try {
+        let comment = await prisma.comments.findUnique({
+            where: {id:comment_id}
+        })
+
+        return comment;
+    }
+
+    catch(err)
+    {
+        console.error("Error getting comment", err.message);
+    }
+}
+
+async function delete_comment(comment_id)
+{
+    try {
+        let comment = await prisma.comments.delete({
+            where: {id:comment_id}
+        })
+        return comment;
+    }
+
+    catch(err)
+    {
+        console.error("Error deleting comment", err.meessage);
+    }
+}
+
+module.exports = {create_comment,get_comments,get_comment,delete_comment}
