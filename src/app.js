@@ -11,7 +11,7 @@ app.use(
 const sign_up_router = require('./routes/sign-up');
 const login_router = require('./routes/login');
 const posts_router = require('./routes/posts');
-
+const comments_router = require('./routes/comments')
 const authenticateToken = require('./middlewares/authenticateToken');
 
 const passport = require('passport');
@@ -25,6 +25,7 @@ app.get('/', (req,res) => {
 app.use('/sign-up',sign_up_router);
 app.use('/login', login_router);
 app.use('/posts', posts_router);
+app.use('/comments', comments_router)
 
 app.get('/protected', authenticateToken, (req,res) => {
     res.send("this is secret");
