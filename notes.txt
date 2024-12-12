@@ -16,10 +16,10 @@ GET /posts DONE
 POST /posts DONE
 GET /posts/:id DONE
 PUT /posts/:id DONE
-DELETE /posts/:id
+DELETE /posts/:id DONE
 
 // filters
-GET /posts?author_id=12
+GET /posts?author_id=12 DONE
 GET /posts?page=1&limit=10
 
 GET /comments/:post_id

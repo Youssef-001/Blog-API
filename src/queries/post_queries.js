@@ -73,4 +73,28 @@ async function delete_post(id) {
     }
 }
 
-module.exports = {get_posts, create_post, get_post,edit_post, delete_post}
+
+async function get_author_posts(author_id)
+{
+    try {
+        const posts = await prisma.posts.findMany({
+            where: {
+                authorId:author_id
+            }
+        })
+
+        if (!posts)
+        {
+            throw new Error('Posts not found');
+        }
+
+        return posts;
+    }
+    catch(err)
+    {
+        console.error("Error getting posts ", err.message);
+        throw new Error(`Couldn't get posts by author ${author_id}`)
+    }
+}
+
+module.exports = {get_posts, create_post, get_post,edit_post, delete_post,get_author_posts}
