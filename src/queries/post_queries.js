@@ -3,11 +3,23 @@ const { get } = require("express/lib/response");
 const prisma = new PrismaClient();
 
 
-async function get_posts()
-{
-    let posts = await prisma.posts.findMany({})
-}
+async function get_posts(page=1, author_id) {
+    let offset = (page - 1) * 10;
 
+    // Build query dynamically
+    const query = {
+        skip: offset,
+        take: 10,
+    };
+
+    if (author_id) {
+        query.where = { authorId: author_id };
+    }
+
+    let posts = await prisma.posts.findMany(query);
+
+    return posts; // Optionally return the posts
+}
 async function create_post(title,content,id)
 {
 
@@ -74,27 +86,6 @@ async function delete_post(id) {
 }
 
 
-async function get_author_posts(author_id)
-{
-    try {
-        const posts = await prisma.posts.findMany({
-            where: {
-                authorId:author_id
-            }
-        })
 
-        if (!posts)
-        {
-            throw new Error('Posts not found');
-        }
 
-        return posts;
-    }
-    catch(err)
-    {
-        console.error("Error getting posts ", err.message);
-        throw new Error(`Couldn't get posts by author ${author_id}`)
-    }
-}
-
-module.exports = {get_posts, create_post, get_post,edit_post, delete_post,get_author_posts}
+module.exports = {get_posts, create_post, get_post,edit_post, delete_post}

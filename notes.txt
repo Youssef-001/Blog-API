@@ -20,7 +20,7 @@ DELETE /posts/:id DONE
 
 // filters
 GET /posts?author_id=12 DONE
-GET /posts?page=1&limit=10
+GET /posts?page=1
 
 GET /comments/:post_id
 POST /comments/:post_id

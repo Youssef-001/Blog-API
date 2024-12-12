@@ -2,11 +2,10 @@ const post_queries = require("../queries/post_queries");
 
 async function get_posts(req, res) {
   let posts;
-  if (req.query.author_id != undefined) {
-    posts = await post_queries.get_author_posts(req.query.author_id);
-  } else {
-    posts = await post_queries.get_posts();
-  }
+  let page = req.query.page || 1;
+
+    posts = await post_queries.get_posts(page, req.query.author_id);
+  
   res.json(posts);
 }
 
