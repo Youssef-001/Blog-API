@@ -51,7 +51,7 @@ async function get_post(id)
 }
 
 
-async function edit_post(title,content,id)
+async function edit_post(title,content,id,status)
 {
     let now = new Date();
     let formattedNow = now.toISOString().slice(0, 19).replace("T", " ");
@@ -65,7 +65,8 @@ async function edit_post(title,content,id)
         data: {
             title:title,
             content: content,
-            updated_at: now
+            updated_at: now,
+            status: status
         }
     })
 

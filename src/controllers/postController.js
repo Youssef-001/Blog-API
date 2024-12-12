@@ -50,9 +50,11 @@ async function update_post(req, res) {
   let post_id = req.params.id;
   let title = req.body.title;
   let content = req.body.content;
+  let edited_post = post_queries.get_post(post_id);
+  let status = req.body.status || edited_post.status;
 
   try {
-    let post = await post_queries.edit_post(title, content, post_id);
+    let post = await post_queries.edit_post(title, content, post_id, status);
     res.json(post);
   } catch (err) {
     console.error(err);
