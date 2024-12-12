@@ -4,7 +4,12 @@ async function get_posts(req, res) {
   let posts;
   let page = req.query.page || 1;
 
-    posts = await post_queries.get_posts(page, req.query.author_id);
+  if (req.user.isAuthor == false)
+    {posts = await post_queries.get_posts(page, req.query.author_id, false);}
+  else {
+    posts = await post_queries.get_posts(page, req.user.id, true);
+  }
+
   
   res.json(posts);
 }
@@ -20,7 +25,7 @@ async function create_post(req, res) {
   }
 
   try {
-    let posts = await post_queries.create_post(title, content, req.user.id);
+    let posts = await post_queries.create_post(title, content, req.user.id, req.body.status || "PUBLISHED");
     res.json(posts);
 
   } catch (err) {

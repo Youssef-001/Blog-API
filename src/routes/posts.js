@@ -2,6 +2,7 @@ const express = require("express"); // Import express
 const router = express.Router(); // Create a router instance
 const postController = require('../controllers/postController');
 const authenticateToken = require("../middlewares/authenticateToken");
+const authenticatePostOwner = require('../middlewares/authenticatePostOwner')
 // Get all posts
 
 router.get('/', authenticateToken,(req,res) => {
@@ -32,11 +33,11 @@ router.get('/:id', authenticateToken, async(req,res) => {
 
 // Edit a post
 
-router.put('/:id', authenticateToken, async(req,res) => {
+router.put('/:id', authenticateToken, authenticatePostOwner, async(req,res) => {
     postController.update_post(req,res);
 })
 
-router.delete('/:id', authenticateToken, async(req,res) => {
+router.delete('/:id', authenticateToken, authenticatePostOwner, async(req,res) => {
     postController.delete_post(req,res);
 })
 

@@ -3,7 +3,7 @@ const { get } = require("express/lib/response");
 const prisma = new PrismaClient();
 
 
-async function get_posts(page=1, author_id) {
+async function get_posts(page=1, author_id, isAuthor) {
     let offset = (page - 1) * 10;
 
     // Build query dynamically
@@ -15,19 +15,24 @@ async function get_posts(page=1, author_id) {
     if (author_id) {
         query.where = { authorId: author_id };
     }
+    if (isAuthor == false)
+    {
+        query.where = {...query.where, status: 'PUBLISHED'};
+    }
 
     let posts = await prisma.posts.findMany(query);
 
     return posts; // Optionally return the posts
 }
-async function create_post(title,content,id)
+async function create_post(title,content,id, status='PUBLISHED')
 {
 
     let post = await prisma.posts.create({
         data: {
             title: title,
             content: content,
-            authorId: id
+            authorId: id,
+            status: status
         }
     })
     
