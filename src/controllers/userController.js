@@ -6,8 +6,9 @@ function createUser(req,res,next){
         bcrypt.hash(req.body.password, 10, async(err,hashedPassword) => {
             if (err) return next(err);
             else {
-                await user_queries.createUser(req.body.username, hashedPassword, req.body.email, Boolean(req.body.isAuthor) || false);
-                res.redirect('/');
+                let isAuthor = (req.body.isAuthor === 'true');
+               let user =  await user_queries.createUser(req.body.username, hashedPassword, req.body.email, Boolean(isAuthor));
+                res.status(200).json(user);
             }
         })
     } catch(err)

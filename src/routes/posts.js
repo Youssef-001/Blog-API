@@ -5,9 +5,12 @@ const authenticateToken = require("../middlewares/authenticateToken");
 const authenticatePostOwner = require('../middlewares/authenticatePostOwner')
 // Get all posts
 
-router.get('/', authenticateToken,(req,res) => {
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
 
-    postController.get_posts(req,res);
+router.get('/',(req,res,next) => {
+
+    postController.get_posts(req,res,next);
 
 }) 
 
@@ -40,5 +43,13 @@ router.put('/:id', authenticateToken, authenticatePostOwner, async(req,res) => {
 router.delete('/:id', authenticateToken, authenticatePostOwner, async(req,res) => {
     postController.delete_post(req,res);
 })
+
+router.post('/cover', authenticateToken,upload.single('cover'), function (req, res, next) {
+    // req.file is the `avatar` file
+    // req.body will hold the text fields, if there were any
+    console.log(req.file);
+    res.json(req.file.path);
+  })
+
 
 module.exports = router;

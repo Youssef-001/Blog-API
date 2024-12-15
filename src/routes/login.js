@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 
 router.post("/", async (req, res, next) => {
   try {
-    let user = await user_queries.get_user(req.body.username);
+    let user =  await user_queries.get_user(req.body.username);
     if (!user) {
       return res.status(401).json({ message: "User not found" });
     }

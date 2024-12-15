@@ -1,18 +1,22 @@
 const express = require('express');
 const app = express();
 require('dotenv').config();
+app.use(express.static('public'))
+var cors = require('cors')
+const bodyParser = require('body-parser')
+
 app.use(express.json())
-app.use(
-    express.urlencoded({
-      extended: true,
-    })
-  );
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(cors())
 
 const sign_up_router = require('./routes/sign-up');
 const login_router = require('./routes/login');
 const posts_router = require('./routes/posts');
 const comments_router = require('./routes/comments')
 const authenticateToken = require('./middlewares/authenticateToken');
+const profile_router = require('./routes/profile');
 
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
@@ -26,6 +30,7 @@ app.use('/sign-up',sign_up_router);
 app.use('/login', login_router);
 app.use('/posts', posts_router);
 app.use('/comments', comments_router)
+app.use('/profile', profile_router);
 
 app.get('/protected', authenticateToken, (req,res) => {
     res.send("this is secret");

@@ -4,7 +4,7 @@ async function get_posts(req, res) {
   let posts;
   let page = req.query.page || 1;
 
-  if (req.user.isAuthor == false)
+  if (true)
     {posts = await post_queries.get_posts(page, req.query.author_id, false);}
   else {
     posts = await post_queries.get_posts(page, req.user.id, true);
