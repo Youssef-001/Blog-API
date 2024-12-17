@@ -24,7 +24,7 @@ async function get_posts(page=1, author_id, isAuthor) {
 
     return posts; // Optionally return the posts
 }
-async function create_post(title,content,id, status='PUBLISHED')
+async function create_post(title,content,id, status='PUBLISHED', cover)
 {
 
     let post = await prisma.posts.create({
@@ -32,7 +32,8 @@ async function create_post(title,content,id, status='PUBLISHED')
             title: title,
             content: content,
             authorId: id,
-            status: status
+            status: status,
+            cover:cover
         }
     })
     

@@ -18,6 +18,7 @@ async function create_post(req, res) {
   let title = req.body.title;
   let content = req.body.content;
   let file = req.file;
+  console.log(file);
 
   if (req.user.isAuthor == false)
   {
@@ -26,7 +27,7 @@ async function create_post(req, res) {
   }
 
   try {
-    let posts = await post_queries.create_post(title, content, req.user.id, req.body.status || "PUBLISHED");
+    let posts = await post_queries.create_post(title, content, req.user.id, req.body.status || "PUBLISHED", file.filename);
     res.json(posts);
 
   } catch (err) {
