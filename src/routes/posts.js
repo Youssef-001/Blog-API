@@ -15,22 +15,16 @@ router.get('/',(req,res,next) => {
 }) 
 
 // Create a post
-router.post('/', authenticateToken,(req,res) => {
+router.post('/',upload.single('cover'), authenticateToken,(req,res) => {
     postController.create_post(req,res);
 })
 
 
 // Get a single post
-router.get('/:id', authenticateToken, async(req,res) => {
-    try {
-    let post = await postController.get_post(req,res);
-    res.json(post);
-    }
-    catch(err)
-    {
-        console.error(err);
-        res.status(403).json({message: "post not found"});
-    }
+router.get('/:id', async(req,res) => {
+    await postController.get_post(req,res);
+    
+
 
 })
 
@@ -45,8 +39,7 @@ router.delete('/:id', authenticateToken, authenticatePostOwner, async(req,res) =
 })
 
 router.post('/cover', authenticateToken,upload.single('cover'), function (req, res, next) {
-    // req.file is the `avatar` file
-    // req.body will hold the text fields, if there were any
+
     console.log(req.file);
     res.json(req.file.path);
   })

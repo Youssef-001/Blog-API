@@ -17,6 +17,7 @@ async function get_posts(req, res) {
 async function create_post(req, res) {
   let title = req.body.title;
   let content = req.body.content;
+  let file = req.file;
 
   if (req.user.isAuthor == false)
   {
