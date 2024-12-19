@@ -17,10 +17,14 @@ const posts_router = require('./routes/posts');
 const comments_router = require('./routes/comments')
 const authenticateToken = require('./middlewares/authenticateToken');
 const profile_router = require('./routes/profile');
-
+const path = require('path')
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
+
+
+app.use(express.static(path.join(__dirname, '../uploads')));
+console.log(path.join(__dirname, '../uploads'))
 
 app.get('/', (req,res) => {
     res.send("hi");

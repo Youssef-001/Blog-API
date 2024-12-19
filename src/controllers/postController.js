@@ -5,7 +5,7 @@ async function get_posts(req, res) {
   let page = req.query.page || 1;
 
   if (true)
-    {posts = await post_queries.get_posts(page, req.query.author_id, false);}
+    {posts = await post_queries.get_posts(parseInt(page), req.query.author_id, false);}
   else {
     posts = await post_queries.get_posts(page, req.user.id, true);
   }
@@ -18,7 +18,6 @@ async function create_post(req, res) {
   let title = req.body.title;
   let content = req.body.content;
   let file = req.file;
-  console.log(file);
 
   if (req.user.isAuthor == false)
   {

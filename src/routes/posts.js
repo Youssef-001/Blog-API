@@ -10,6 +10,7 @@ const upload = multer({ dest: 'uploads/' })
 
 router.get('/',(req,res,next) => {
 
+
     postController.get_posts(req,res,next);
 
 }) 
