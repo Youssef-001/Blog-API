@@ -52,7 +52,7 @@ async function get_post(id)
 }
 
 
-async function edit_post(title,content,id,status)
+async function edit_post(title,content,id,status, cover)
 {
     let now = new Date();
     let formattedNow = now.toISOString().slice(0, 19).replace("T", " ");
@@ -67,7 +67,8 @@ async function edit_post(title,content,id,status)
             title:title,
             content: content,
             updated_at: now,
-            status: status
+            status: status,
+            cover: cover
         }
     })
 
