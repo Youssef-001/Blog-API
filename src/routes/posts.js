@@ -4,6 +4,7 @@ const postController = require('../controllers/postController');
 const authenticateToken = require("../middlewares/authenticateToken");
 const authenticatePostOwner = require('../middlewares/authenticatePostOwner')
 // Get all posts
+const axios = require('axios');
 
 const multer  = require('multer')
 const upload = multer({ dest: 'uploads/' })
@@ -16,9 +17,12 @@ router.get('/',(req,res,next) => {
 }) 
 
 // Create a post
-router.post('/',upload.single('cover'), authenticateToken,(req,res) => {
+router.post('/',upload.single('cover'), authenticateToken,async(req,res) => {
+
+
     postController.create_post(req,res);
 })
+
 
 
 // Get a single post
@@ -31,7 +35,7 @@ router.get('/:id', async(req,res) => {
 
 // Edit a post
 
-router.put('/:id', authenticateToken, authenticatePostOwner, async(req,res) => {
+router.put('/:id',upload.single('cover'), authenticateToken, authenticatePostOwner, async(req,res) => {
     postController.update_post(req,res);
 })
 

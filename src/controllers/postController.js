@@ -51,7 +51,7 @@ async function update_post(req, res) {
   let post_id = req.params.id;
   let title = req.body.title;
   let content = req.body.content;
-  let edited_post = post_queries.get_post(post_id);
+  let edited_post = await post_queries.get_post(post_id);
   let status = req.body.status || edited_post.status;
 
   try {

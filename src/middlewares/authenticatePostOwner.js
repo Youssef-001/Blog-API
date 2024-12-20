@@ -5,6 +5,7 @@ async function authenticatePostOwner(req,res, next)
     let post_id = req.params.id;
     let post = await post_queries.get_post(post_id);
 
+
     if (post.authorId != req.user.id)
     {
         res.status(401).json("Unauthorized");
