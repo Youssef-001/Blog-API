@@ -53,7 +53,7 @@ async function update_post(req, res) {
   let content = req.body.content;
   let edited_post = await post_queries.get_post(post_id);
   let status = req.body.status || edited_post.status;
-  let cover = req.file.filename
+  let cover = req.file.filename || edited_post.cover;
 
   try {
     let post = await post_queries.edit_post(title, content, post_id, status, cover);
