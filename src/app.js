@@ -40,10 +40,9 @@ app.use((req, res, next) => {
   if (!req.cookies.userId) {
       const userId = uuidv4();
       res.cookie('userId', userId, {
-          httpOnly: true,
           maxAge: 1000 * 60 * 60 * 24 * 30, // 30 days
           secure: process.env.NODE_ENV === 'production', // Only set secure cookies in production
-          sameSite: 'Strict', // To avoid issues with cross-site requests
+          sameSite: 'Lax', // To avoid issues with cross-site requests
       });
   }
   next();
