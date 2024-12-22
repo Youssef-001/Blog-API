@@ -13,7 +13,8 @@ try {
 let content = req.body.content;
 let author_name = req.body.name;
 let post_id = req.params.post_id;
-let comment = await comment_queries.create_comment(content, author_name, post_id);
+let author_id = req.cookies.userId;
+let comment = await comment_queries.create_comment(content, author_name,author_id, post_id);
 res.json (comment);}
 
 catch(err)

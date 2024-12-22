@@ -3,14 +3,15 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 
-async function create_comment(content, author_name, post_id)
+async function create_comment(content, author_name,authorId, post_id)
 {
     try{
     let comment  = await prisma.comments.create({
         data: {
             content: content,
             authorName: author_name,
-            post_id: post_id
+            post_id: post_id,
+            authorId: authorId
         }
     })
 
