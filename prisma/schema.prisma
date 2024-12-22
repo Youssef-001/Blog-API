@@ -22,7 +22,6 @@ model users{
   password String
   isAuthor Boolean @default(false)
   posts posts[]
-  comments comments[]
 }
 
 model posts {
@@ -43,11 +42,9 @@ model comments {
   id String @id @default(uuid())
   content String
   authorName String 
-  authorId String
   created_at DateTime @default(now())
   post posts @relation(fields: [post_id], references: [id])
   post_id String 
- author     users    @relation(fields: [authorId], references: [id]) // Reference to user who wrote the comment
  
 
 }

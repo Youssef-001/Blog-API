@@ -11,7 +11,7 @@ if (req.body.content == "")
 
 try {
 let content = req.body.content;
-let author_name = req.user.username;
+let author_name = req.body.name;
 let authorId = req.user.id;
 let post_id = req.params.post_id;
 let comment = await comment_queries.create_comment(content, author_name, authorId, post_id);
