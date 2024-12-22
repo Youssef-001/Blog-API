@@ -13,8 +13,10 @@ async function authenticateCommentDeletion(req,res,next)
 
     let comment = await comment_queries.get_comment(comment_id);
 
+    let cookie = req.cookies.userId;
 
-    if (post.authorId == user.id  || comment.authorId == user.id)
+
+    if (comment.authorId == cookie  || user.isAuthor == true)
     {
         next();
     }

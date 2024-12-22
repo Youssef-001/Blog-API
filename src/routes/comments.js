@@ -19,7 +19,7 @@ router.get('/:post_id', (req,res) => {
 })
 
 
-router.delete('/:post_id/:comment_id', authenticateToken, authenticateCommentDeletion, (req,res) => {
+router.delete('/:post_id/:comment_id', authenticateCommentDeletion, (req,res) => {
 
     commentController.delete_comment(req,res);
 
