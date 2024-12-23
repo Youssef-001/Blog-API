@@ -35,7 +35,6 @@ console.log(path.join(__dirname, '../uploads'))
 
 
 const { v4: uuidv4 } = require('uuid');
-
 app.use((req, res, next) => {
   if (!req.cookies.userId) {
       const userId = uuidv4();
