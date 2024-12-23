@@ -1,4 +1,9 @@
 {
+  "name": "your-app-name",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node src/app.js"  
+  },
   "dependencies": {
     "@prisma/client": "^6.0.1",
     "@prisma/extension-accelerate": "^1.2.1",
